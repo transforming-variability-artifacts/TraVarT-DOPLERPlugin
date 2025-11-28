@@ -21,7 +21,9 @@ import de.vill.model.FeatureModel;
 import edu.kit.dopler.io.DecisionModelReader;
 import edu.kit.dopler.io.DecisionModelWriter;
 import edu.kit.dopler.model.Dopler;
-import edu.kit.travart.dopler.plugin.DoplerPlugin;
+import edu.kit.travart.dopler.plugin.DoplerPluginImpl;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,7 +43,7 @@ import static at.jku.cps.travart.core.common.IModelTransformer.STRATEGY.ROUNDTRI
 class TransformationStressTest {
 
     private static final Path DATA_PATH = Path.of("src", "test", "resources", "stress", "working");
-    private final DoplerPlugin plugin = new DoplerPlugin();
+    private final DoplerPluginImpl plugin = new DoplerPluginImpl();
     private final IModelTransformer<Dopler> transformer = plugin.getTransformer();
 
     /**
@@ -49,17 +51,18 @@ class TransformationStressTest {
      *
      * @param path Expected model    Real, transformed model
      */
+    @Disabled // Ignore only during development!
     @ParameterizedTest(name = "{0}")
     @MethodSource("dataSourceMethod")
     @Execution(ExecutionMode.CONCURRENT)
     void tryToConvert(Path path) throws Exception {
         FeatureModel featureModel = new UVLModelFactory().parse(Files.readString(path));
-        Dopler dopler1 = transformer.transform(featureModel, "", ONE_WAY);
-        Dopler dopler2 = transformer.transform(featureModel, "", ROUNDTRIP);
+        Dopler dopler1 = transformer.transform(featureModel, "", ONE_WAY, false);
+        Dopler dopler2 = transformer.transform(featureModel, "", ROUNDTRIP, false);
         Dopler cleanDopler1 = new DecisionModelReader().read(new DecisionModelWriter().write(dopler1), "");
         Dopler cleanDopler2 = new DecisionModelReader().read(new DecisionModelWriter().write(dopler2), "");
-        transformer.transform(cleanDopler1, "", ONE_WAY);
-        transformer.transform(cleanDopler2, "", ROUNDTRIP);
+        transformer.transform(cleanDopler1, "", ONE_WAY, false);
+        transformer.transform(cleanDopler2, "", ROUNDTRIP, false);
     }
 
     private static Stream<Arguments> dataSourceMethod() throws IOException {

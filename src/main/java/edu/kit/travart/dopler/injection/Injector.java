@@ -29,6 +29,7 @@ import edu.kit.travart.dopler.sampling.Z3OutputParser;
 import edu.kit.travart.dopler.sampling.Z3OutputParserImpl;
 import edu.kit.travart.dopler.sampling.Z3Runner;
 import edu.kit.travart.dopler.sampling.Z3RunnerImpl;
+import edu.kit.travart.dopler.transformation.DoplerBenchmarkingTransformer;
 import edu.kit.travart.dopler.transformation.Transformer;
 import edu.kit.travart.dopler.transformation.decision.to.feature.AttributeCreator;
 import edu.kit.travart.dopler.transformation.decision.to.feature.AttributeCreatorImpl;
@@ -124,6 +125,9 @@ public final class Injector extends AbstractInjector {
 
         install(Transformer.class,
                 new Transformer(getInstance(DmToFmTransformer.class), getInstance(FmToDmTransformer.class)));
+        install(DoplerBenchmarkingTransformer.class,
+                new DoplerBenchmarkingTransformer(getInstance(DmToFmTransformer.class), getInstance(FmToDmTransformer.class)));
+        
     }
 
     private void installDmToFm() {

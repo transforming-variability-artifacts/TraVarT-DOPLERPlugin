@@ -42,7 +42,7 @@ class DoplerPluginTest {
 
     private static final Path TEST_DATA_PATH = Paths.get("src", "test", "resources", "plugin");
 
-    private final IPlugin<Dopler> doplerPlugin = new DoplerPlugin();
+    private final IPlugin<Dopler> doplerPlugin = new DoplerPluginImpl();
     private final ISerializer<Dopler> serializer = doplerPlugin.getSerializer();
     private final IDeserializer<Dopler> deserializer = doplerPlugin.getDeserializer();
     private final IPrettyPrinter<Dopler> printer = doplerPlugin.getPrinter();

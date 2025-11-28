@@ -24,6 +24,7 @@ import edu.kit.travart.dopler.transformation.feature.to.decision.FmToDmTransform
 /**
  * Transforms {@link Dopler} models into {@link FeatureModel}s and vice versa.
  */
+// FIXME Use a more intuitive name for class
 public class Transformer implements IModelTransformer<Dopler> {
 
     private final DmToFmTransformer dmToFmTransformer;
@@ -41,12 +42,12 @@ public class Transformer implements IModelTransformer<Dopler> {
     }
 
     @Override
-    public FeatureModel transform(Dopler model, String s, STRATEGY strategy) {
+    public FeatureModel transform(Dopler model, String s, STRATEGY strategy, boolean intermediate) {
         return dmToFmTransformer.transform(model, strategy);
     }
 
     @Override
-    public Dopler transform(FeatureModel featureModel, String s, STRATEGY strategy) {
+    public Dopler transform(FeatureModel featureModel, String s, STRATEGY strategy, boolean intermediate) {
         return fmToDmTransformer.transform(featureModel, strategy);
     }
 }

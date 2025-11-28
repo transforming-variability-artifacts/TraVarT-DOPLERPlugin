@@ -7,11 +7,17 @@
     <name>TraVarT - DOPLER - decision</name>
     <description>TraVarT - Transforming Variability Artifacts - DOPLER - decision</description>
 
+	<repositories>
+		<repository>
+			<id>travart-lib-static</id>
+			<url>file://${project.basedir}/lib</url>
+		</repository>
+	</repositories>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <plugin.class>edu/kit/dopler/plugin/DoplerPlugin.java</plugin.class>
+        <plugin.class>edu.kit.travart.dopler.plugin.DoplerPlugin</plugin.class>
         <plugin.version>2.0</plugin.version>
         <plugin.provider>CPS</plugin.provider>
         <plugin.dependencies/>
@@ -58,17 +64,13 @@
             <groupId>at.jku.cps</groupId>
             <artifactId>travart-core</artifactId>
             <version>2.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/travart-core-2.0.0.jar</systemPath>
+            <scope>provided</scope>
         </dependency>
-
-        <!-- local jar with dopler model -->
+        
         <dependency>
-            <groupId>placeholder3</groupId>
-            <artifactId>placeholder4</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/TraVarT-DOPLER-SMT.jar</systemPath>
+        	<groupId>placeholder3</groupId>
+        	<artifactId>placeholder4</artifactId>
+        	<version>1.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14 -->
@@ -85,7 +87,6 @@
 
     <build>
         <plugins>
-
             <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
             <!-- needed for GitHub actions -->
             <plugin>

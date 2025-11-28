@@ -36,12 +36,12 @@ class DoplerConfigurable implements IConfigurable {
     }
 
     @Override
-    public boolean isSelected() {
+    public boolean isConfigured() {
         return selected;
     }
 
     @Override
-    public void setSelected(boolean selected) {
+    public void setConfigured(boolean selected) {
         this.selected = selected;
     }
 

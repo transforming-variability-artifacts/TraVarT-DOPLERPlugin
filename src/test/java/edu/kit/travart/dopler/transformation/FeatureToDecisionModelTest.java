@@ -23,7 +23,7 @@ import de.vill.model.FeatureModel;
 import edu.kit.travart.dopler.TestUtils;
 import edu.kit.dopler.model.Dopler;
 import edu.kit.travart.dopler.plugin.CsvFormat;
-import edu.kit.travart.dopler.plugin.DoplerPlugin;
+import edu.kit.travart.dopler.plugin.DoplerPluginImpl;
 import edu.kit.travart.dopler.transformation.decision.to.feature.TreeBeautifier;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ import java.nio.file.Paths;
 
 class FeatureToDecisionModelTest extends TransformationTest<FeatureModel, Dopler> {
 
-    private final IPlugin<Dopler> plugin = new DoplerPlugin();
+    private final IPlugin<Dopler> plugin = new DoplerPluginImpl();
 
     @Override
     protected String readToModelAsString(Path path) throws IOException {
@@ -88,13 +88,13 @@ class FeatureToDecisionModelTest extends TransformationTest<FeatureModel, Dopler
     @Override
     protected Dopler transformFromModelToToModel(FeatureModel modelToBeTransformed, IModelTransformer.STRATEGY strategy)
             throws NotSupportedVariabilityTypeException {
-        return plugin.getTransformer().transform(modelToBeTransformed, TreeBeautifier.STANDARD_MODEL_NAME, strategy);
+        return plugin.getTransformer().transform(modelToBeTransformed, TreeBeautifier.STANDARD_MODEL_NAME, strategy, false);
     }
 
     @Override
     protected FeatureModel transformToModelToFromModel(Dopler modelToBeTransformed)
             throws NotSupportedVariabilityTypeException {
         return plugin.getTransformer().transform(modelToBeTransformed, TreeBeautifier.STANDARD_MODEL_NAME,
-                IModelTransformer.STRATEGY.ONE_WAY);
+                IModelTransformer.STRATEGY.ONE_WAY, false);
     }
 }

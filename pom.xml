@@ -20,6 +20,7 @@
         <plugin.class>edu.kit.travart.dopler.plugin.DoplerPlugin</plugin.class>
         <plugin.version>2.0</plugin.version>
         <plugin.provider>CPS</plugin.provider>
+        <checkstyle-maven-plugin.version>3.6.0</checkstyle-maven-plugin.version>
         <plugin.dependencies/>
     </properties>
 
@@ -103,6 +104,21 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle-maven-plugin.version}</version>
+				<configuration>
+					<configLocation>${project.basedir}/checkstyle.xml</configLocation>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
